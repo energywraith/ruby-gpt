@@ -1,0 +1,14 @@
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.2.2
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  Exclude:
+    - bin/*
+    - db/**/*
+    - config/**/*
+    - vendor/**/*
+    - Gemfile
+
+Style/FrozenStringLiteralComment:
+  Enabled: false

@@ -1,0 +1,46 @@
+# Ignore bundler config
+/.bundle/
+
+# Ignore gem-related files
+*.gem
+Gemfile.lock
+
+# Ignore YARD documentation
+.yardoc
+/yardoc/
+
+# Ignore log files
+/log/*
+!/log/.keep
+
+# Ignore temporary files
+/tmp/
+*.tmp
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore coverage reports
+/coverage/
+
+# Ignore test artifacts
+/test/tmp/
+test/version.txt
+
+# Ignore IDE files
+.idea/
+*.swp
+*~
+*.sublime-project
+*.sublime-workspace
+
+# Ignore environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Ignore vendor directory
+vendor/
