@@ -13,7 +13,18 @@ module RubyGPT
       @fetcher = Fetcher.new
     end
 
-    def completions(body = { model: DEFAULT_MODEL, messages: [{ role: 'user', content: 'Say this is a test!' }] })
+    def completions(body)
+      raise ArgumentError, "The 'messages' key is required in the body" unless body.key?(:messages)
+
+      unless body[:messages].all? { |message| message.is_a?(RubyGPT::Message) }
+        raise ArgumentError, 'All messages must be instances of RubyGPT::Message'
+      end
+
+      body[:messages] = body[:messages].map(&:to_h)
+
+      # Use DEFAULT_MODEL if no model is specified in the body
+      body[:model] ||= DEFAULT_MODEL
+
       @fetcher.post(OPEN_AI_COMPLETIONS_URL, @headers.get, body)
     end
   end
