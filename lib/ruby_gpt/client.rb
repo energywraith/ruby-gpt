@@ -9,28 +9,36 @@ module RubyGPT
     DEFAULT_MODEL = 'gpt-3.5-turbo'.freeze
     DEFAULT_TEMPERATURE = 0.7
 
-    def initialize(api_key)
+    def initialize(api_key:)
       raise ArgumentError, "The 'api_key' argument is required" unless api_key
 
-      @headers = Headers.new(api_key)
+      @headers = Headers.new(api_key: api_key)
       @fetcher = Fetcher.new
     end
 
-    def completions(body)
-      raise ArgumentError, "The 'messages' key is required in the body" unless body.key?(:messages)
+    def completions(messages:, model: DEFAULT_MODEL, temperature: DEFAULT_TEMPERATURE)
+      validate_messages(messages)
 
-      unless body[:messages].all? { |message| message.is_a?(RubyGPT::Message) }
-        raise ArgumentError, 'All messages must be instances of RubyGPT::Message'
-      end
-
-      body[:messages] = body[:messages].map(&:to_h)
-
-      # Use DEFAULT_MODEL if no model is specified in the body
-      body[:model] ||= DEFAULT_MODEL
-      # Use DEFAULT_TEMPERATURE if no temperature is specified in the body
-      body[:temperature] ||= DEFAULT_TEMPERATURE
+      body = {
+        messages: messages.map(&:to_h),
+        model: model,
+        temperature: temperature
+      }
 
       @fetcher.post(OPEN_AI_COMPLETIONS_URL, @headers.get, body)
+    end
+
+    private
+
+    def validate_messages(messages)
+      if messages.nil? || messages.empty?
+        raise ArgumentError,
+              "The 'messages' parameter is required"
+      end
+
+      return if messages.all? { |message| message.is_a?(RubyGPT::Message) }
+
+      raise ArgumentError, 'All messages must be instances of RubyGPT::Message'
     end
   end
 end

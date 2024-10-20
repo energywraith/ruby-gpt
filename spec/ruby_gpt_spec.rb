@@ -8,12 +8,12 @@ describe RubyGPT do
   end
 
   it 'can initialize a client' do
-    client = RubyGPT::Client.new(api_key)
+    client = RubyGPT::Client.new(api_key: api_key)
     expect(client).to be_an_instance_of(RubyGPT::Client)
   end
 
   it 'can not initialize internal classes' do
     expect { RubyGPT::Headers.new(api_key) }.to raise_error(NameError)
-    expect { RubyGPT::Fetcher.new(api_key) }.to raise_error(NameError)
+    expect { RubyGPT::Fetcher.new }.to raise_error(NameError)
   end
 end
