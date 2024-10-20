@@ -1,18 +1,24 @@
+require 'http'
 require_relative 'headers'
 
 module RubyGPT
   # Fetcher is a private class responsible for handling the actual
   # data retrieval process from the API.
   class Fetcher
-    def initialize(api_key)
-      @headers = Headers.new(api_key).get
+    def post(endpoint, headers, body)
+      response = make_post_request(endpoint, headers, body)
+      parse_response(response)
     end
 
-    def get
-      'This is a test!'
+    private
+
+    def make_post_request(endpoint, headers, body)
+      HTTP.headers(headers).post(endpoint, json: body)
     end
 
-    # Define methods for fetching data here
+    def parse_response(response)
+      JSON.parse(response.body)
+    end
   end
 
   private_constant :Fetcher

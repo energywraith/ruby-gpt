@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gemspec
+gem "http", '~> 5.2'
 
 group :development do
   gem 'rake', '~> 13.0'
