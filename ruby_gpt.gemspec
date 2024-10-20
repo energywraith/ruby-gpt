@@ -6,6 +6,6 @@ Gem::Specification.new do |s|
   s.description = 'ChatGPT client written in Ruby.'
   s.authors = ['energywraith']
   s.homepage = 'https://github.com/energywraith/ruby-gpt'
-  s.files = ['lib/ruby_gpt.rb', 'lib/ruby_gpt/client.rb']
+  s.files = ['lib/ruby_gpt.rb', 'lib/ruby_gpt/client.rb', 'lib/ruby_gpt/fetcher.rb']
   s.metadata['rubygems_mfa_required'] = 'true'
 end
