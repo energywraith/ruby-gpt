@@ -9,6 +9,8 @@ module RubyGPT
     DEFAULT_MODEL = 'gpt-3.5-turbo'.freeze
 
     def initialize(api_key)
+      raise ArgumentError, "The 'api_key' argument is required" unless api_key
+
       @headers = Headers.new(api_key)
       @fetcher = Fetcher.new
     end

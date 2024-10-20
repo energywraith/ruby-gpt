@@ -11,4 +11,9 @@ describe RubyGPT::Message do
     expect(message.role).to eql('user')
     expect(message.content).to eql('Say this is a test!')
   end
+
+  it 'throws for invalid parameters' do
+    expect { RubyGPT::Message.new(role: 'UNKNOWN', content: 'Content') }.to raise_error(ArgumentError)
+    expect { RubyGPT::Message.new(role: 'user', content: nil) }.to raise_error(ArgumentError)
+  end
 end
