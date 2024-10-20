@@ -3,14 +3,16 @@ module RubyGPT
   # headers required for API requests.
   class Headers
     def initialize(api_key)
-      @api_key = api_key
-    end
-
-    def build
-      {
-        'Authorization' => "Bearer #{@api_key}",
+      @headers = {
+        'Authorization' => "Bearer #{api_key}",
         'Content-Type' => 'application/json'
       }
     end
+
+    def get
+      @headers
+    end
   end
+
+  private_constant :Headers
 end

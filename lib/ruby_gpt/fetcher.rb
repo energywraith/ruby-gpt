@@ -5,8 +5,7 @@ module RubyGPT
   # data retrieval process from the API.
   class Fetcher
     def initialize(api_key)
-      @api_key = api_key
-      @headers = Headers.new(api_key).build
+      @headers = Headers.new(api_key).get
     end
 
     def get
@@ -15,4 +14,6 @@ module RubyGPT
 
     # Define methods for fetching data here
   end
+
+  private_constant :Fetcher
 end
