@@ -7,6 +7,7 @@ module RubyGPT
   class Client
     OPEN_AI_COMPLETIONS_URL = 'https://api.openai.com/v1/chat/completions'.freeze
     DEFAULT_MODEL = 'gpt-3.5-turbo'.freeze
+    DEFAULT_TEMPERATURE = 0.7
 
     def initialize(api_key)
       raise ArgumentError, "The 'api_key' argument is required" unless api_key
@@ -26,6 +27,8 @@ module RubyGPT
 
       # Use DEFAULT_MODEL if no model is specified in the body
       body[:model] ||= DEFAULT_MODEL
+      # Use DEFAULT_TEMPERATURE if no temperature is specified in the body
+      body[:temperature] ||= DEFAULT_TEMPERATURE
 
       @fetcher.post(OPEN_AI_COMPLETIONS_URL, @headers.get, body)
     end
